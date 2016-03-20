@@ -6,7 +6,7 @@ package org.vegan.model;
 /**
  * File maps to the Student.xlsx file.
  * 
- * @author u326406
+ * @author tegan
  *
  */
 public class Student {

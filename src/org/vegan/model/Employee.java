@@ -4,7 +4,7 @@
 package org.vegan.model;
 
 /**
- * @author u326406
+ * @author tegan
  *
  */
 public class Employee {
