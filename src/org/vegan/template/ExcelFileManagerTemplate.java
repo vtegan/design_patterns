@@ -102,8 +102,24 @@ public abstract class ExcelFileManagerTemplate<T> {
 	 * @param t  A generic data type that enables the client to choose any Value Object.
 	 * @param cell  Represents the cell from an Excel file.
 	 */
-	protected abstract void processBasedOnCellType();
+	//protected abstract void processBasedOnCellType();
+	protected void processBasedOnCellType() {
+		//TODO:  See if we can replace this code with a factory.
+		//cell.getCellType() returns numbers such as 1 or 0.
+		switch (cell.getCellType())
+		{
+		case Cell.CELL_TYPE_NUMERIC:  // this equals 0.
+			mapNumericColumns();
+			break;
+		case Cell.CELL_TYPE_STRING:  // this equals 1.
+			mapStringColumns();
+			break;
+		}
+
+	}
 
 	protected abstract void setMappingObjects(T t, Cell cell);
+	protected abstract void mapNumericColumns();
+	protected abstract void mapStringColumns();
 
 }

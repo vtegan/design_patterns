@@ -12,19 +12,7 @@ import org.vegan.model.Student;
  */
 public class StudentExcelProcessing extends ExcelFileManagerTemplate<Student> implements INumericColumns, IStringColumns {
 	
-	@Override
-	protected void processBasedOnCellType() {
-		switch (cell.getCellType())
-		{
-		case Cell.CELL_TYPE_NUMERIC:
-			mapNumericColumns();
-			break;
-		case Cell.CELL_TYPE_STRING:
-			mapStringColumns();
-			break;
-		}
-		
-	}
+	
 
 	@Override
 	public void mapStringColumns() {

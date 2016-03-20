@@ -15,19 +15,8 @@ public class EmployeeExcelProcessing extends ExcelFileManagerTemplate<Employee> 
 	/* (non-Javadoc)
 	 * @see org.vegan.template.ExcelFileManager#processBasedOnCellType(org.vegan.model.Employee, org.apache.poi.ss.usermodel.Cell)
 	 */
-	@Override
-	protected void processBasedOnCellType() {
-		switch (cell.getCellType())
-		{
-		case Cell.CELL_TYPE_NUMERIC:
-			mapNumericColumns();
-			break;
-		case Cell.CELL_TYPE_STRING:
-			mapStringColumns();
-			break;
-		}
-
-	}
+	//@Override
+	
 	
 	
 	@Override
