@@ -5,7 +5,8 @@ package org.vegan.template;
 
 
 /**
- * @author u326406
+ * Used to enable customization for Numeric Excel cells
+ * @author tegan
  *
  */
 public interface INumericColumns {

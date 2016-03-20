@@ -7,24 +7,17 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.vegan.model.Employee;
 
 /**
- * @author u326406
+ * Contains custom code that enables processing of an Employee Excel file.
+ * @author tegan
  *
  */
 public class EmployeeExcelProcessing extends ExcelFileManagerTemplate<Employee> implements INumericColumns, IStringColumns {
 
-	/* (non-Javadoc)
-	 * @see org.vegan.template.ExcelFileManager#processBasedOnCellType(org.vegan.model.Employee, org.apache.poi.ss.usermodel.Cell)
-	 */
-	//@Override
-	
-	
-	
+
 	@Override
 	public void mapStringColumns() {
 		t.setName(cell.getStringCellValue());  // column 2 in the Excel File.
 	}
-
-
 
 	/**
 	 * Custom method that maps the data types in the cells to the column in the Excel spreadsheet.

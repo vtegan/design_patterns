@@ -7,7 +7,8 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.vegan.model.Student;
 
 /**
- * @author u326406
+ * Contains custom code that enables processing of a Student Excel file.
+ * @author tegan
  *
  */
 public class StudentExcelProcessing extends ExcelFileManagerTemplate<Student> implements INumericColumns, IStringColumns {

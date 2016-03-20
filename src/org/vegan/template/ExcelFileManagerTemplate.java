@@ -16,8 +16,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
-
-
 /**
  * Manages Excel file operations.  Allows the client to enter an Excel file and to load the results into a list of value object.
  * This class uses the Template Design Pattern, because most of the code is repetitive, except for a few small lines of code.
@@ -25,16 +23,27 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * 
  * Also, this class uses generics, so we can be flexible and add any type of value object that we want.
  * 
- * @author u326406
+ * @author tegan
  *
  */
 public abstract class ExcelFileManagerTemplate<T> {
 
-	protected T t;
+	protected T t; //Generic that enables the client to add different types of Value Objects.
 	protected Cell cell;
 
 
 
+	/**
+	 * Reads Cell values in Excel and maps the columns in the Excel file to the proper Value objects, so the values in the Excel file will get
+	 * mapped the Value object, then a Collection.
+	 * 
+	 * @param inputFile                    Excel file that contains the values.
+	 * @param cls                          Value Object that will get mapped and become part of the collection.  Uses reflection and generic types.
+	 * @return                             A List of chosen Value Objects.
+	 * @throws IOException                 If the file cannot be found.
+	 * @throws InstantiationException      If the instantiation of the object cannot be created or does not exist.
+	 * @throws IllegalAccessException
+	 */
 	public final List<T> loadFileContentsIntoList(String inputFile, Class<T> cls) throws IOException, InstantiationException, IllegalAccessException{
 
 
@@ -75,10 +84,10 @@ public abstract class ExcelFileManagerTemplate<T> {
 				//Template Design Pattern  
 				//The code below needs to be custom built based on the type of data that exist in the column.
 				//       This makes the processing difficult to reuse.  My vision would be to create a template design pattern that 
-				//       Would make this method the template and the processBasedOnCellType method that gets customized.
+				//       Would make this method the template and the abstract methods below that would get customized.
 				//Check the cell type and format accordingly
-				setMappingObjects(t, cell);
-				processBasedOnCellType();  // This is the piece that varies, so the subclass will figure out how this works.
+				setMappingObjects(t, cell);  //this varies; therefore this gets customized via a template.
+				processBasedOnCellType();
 			}
 			lstValueObject.add(t);
 		}
@@ -88,7 +97,7 @@ public abstract class ExcelFileManagerTemplate<T> {
 		file.close();
 		workbook.close();
 
-		//Remove the first column, because we don't want to see the header.
+		//Remove the first row, because we don't want to see the header.
 		lstValueObject.remove(0);  //TODO:  This code assumes we are removing the header, which should be at the top of the Excel file.
 
 		return lstValueObject;
@@ -102,24 +111,34 @@ public abstract class ExcelFileManagerTemplate<T> {
 	 * @param t  A generic data type that enables the client to choose any Value Object.
 	 * @param cell  Represents the cell from an Excel file.
 	 */
-	//protected abstract void processBasedOnCellType();
 	protected void processBasedOnCellType() {
-		//TODO:  See if we can replace this code with a factory.
 		//cell.getCellType() returns numbers such as 1 or 0.
 		switch (cell.getCellType())
 		{
 		case Cell.CELL_TYPE_NUMERIC:  // this equals 0.
-			mapNumericColumns();
+			mapNumericColumns();  //this varies; therefore this gets customized via a template.
 			break;
 		case Cell.CELL_TYPE_STRING:  // this equals 1.
-			mapStringColumns();
+			mapStringColumns();  //this varies; therefore this gets customized via a template.
 			break;
 		}
-
 	}
 
+	/**
+	 * Sets the mapping between the value object and the cell in Excel.
+	 * @param t        A generic data type that enables the client to choose any Value Object.
+	 * @param cell     Represents the cell from an Excel file.
+	 */
 	protected abstract void setMappingObjects(T t, Cell cell);
+	
+	/**
+	 * Maps Numeric cells to the proper column in the Excel file.
+	 */
 	protected abstract void mapNumericColumns();
+	
+	/**
+	 * Maps Cell cells to the proper column in the Excel file.
+	 */
 	protected abstract void mapStringColumns();
 
 }

@@ -1,6 +1,10 @@
 package org.vegan.template;
 
-
+/**
+ * Used to enable customization for Numeric Excel cells
+ * @author tegan
+ *
+ */
 public interface IStringColumns {
 	
 	/**
