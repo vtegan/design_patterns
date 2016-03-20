@@ -1,7 +1,7 @@
 package org.vegan.template;
 
 /**
- * Used to enable customization for Numeric Excel cells
+ * Used to enable customization for String Excel cells
  * @author tegan
  *
  */
